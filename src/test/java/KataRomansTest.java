@@ -28,6 +28,11 @@ public class KataRomansTest {
     testRomanSymbolsParsing("C", 100);
   }
 
+  @Test
+  void D_is_500() {
+    testRomanSymbolsParsing("D", 500);
+  }
+
   private void testRomanSymbolsParsing(String romanSymbols, Integer expectedInteger) {
     assertThat(KataRomans.parse(romanSymbols)).isEqualTo(expectedInteger);
   }
