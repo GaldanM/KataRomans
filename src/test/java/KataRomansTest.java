@@ -63,6 +63,16 @@ public class KataRomansTest {
     testRomanSymbolsParsing("XC", 90);
   }
 
+  @Test
+  void CD_is_400() {
+    testRomanSymbolsParsing("CD", 400);
+  }
+
+  @Test
+  void CM_is_900() {
+    testRomanSymbolsParsing("CM", 900);
+  }
+
   private void testRomanSymbolsParsing(String romanSymbols, Integer expectedInteger) {
     assertThat(KataRomans.parse(romanSymbols)).isEqualTo(expectedInteger);
   }

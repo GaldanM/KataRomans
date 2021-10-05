@@ -3,6 +3,8 @@ public enum RomanSymbol {
   IX(9),
   XL(40),
   XC(90),
+  CD(400),
+  CM(900),
   I(1),
   V(5),
   X(10),
