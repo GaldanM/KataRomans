@@ -9,4 +9,11 @@ public class KataRomansTest {
 
     assertThat(KataRomans.parse(oneI)).isEqualTo(1);
   }
+
+  @Test
+  void V_is_5() {
+    String oneV = "V";
+
+    assertThat(KataRomans.parse(oneV)).isEqualTo(5);
+  }
 }
