@@ -53,6 +53,16 @@ public class KataRomansTest {
     testRomanSymbolsParsing("IX", 9);
   }
 
+  @Test
+  void XL_is_40() {
+    testRomanSymbolsParsing("XL", 40);
+  }
+
+  @Test
+  void XC_is_90() {
+    testRomanSymbolsParsing("XC", 90);
+  }
+
   private void testRomanSymbolsParsing(String romanSymbols, Integer expectedInteger) {
     assertThat(KataRomans.parse(romanSymbols)).isEqualTo(expectedInteger);
   }
