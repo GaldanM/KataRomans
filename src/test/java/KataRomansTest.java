@@ -38,6 +38,21 @@ public class KataRomansTest {
     testRomanSymbolsParsing("M", 1000);
   }
 
+  @Test
+  void symbols_should_add() {
+    testRomanSymbolsParsing("XVI", 16);
+  }
+
+  @Test
+  void IV_is_4() {
+    testRomanSymbolsParsing("IV", 4);
+  }
+
+  @Test
+  void IX_is_9() {
+    testRomanSymbolsParsing("IX", 9);
+  }
+
   private void testRomanSymbolsParsing(String romanSymbols, Integer expectedInteger) {
     assertThat(KataRomans.parse(romanSymbols)).isEqualTo(expectedInteger);
   }

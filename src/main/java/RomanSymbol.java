@@ -1,4 +1,6 @@
 public enum RomanSymbol {
+  IV(4),
+  IX(9),
   I(1),
   V(5),
   X(10),
