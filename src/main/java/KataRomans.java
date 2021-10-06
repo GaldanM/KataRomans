@@ -1,13 +1,13 @@
 import java.util.Arrays;
-import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class KataRomans {
-  public static Integer parse(String input) {
-    checkInput(input);
+  public static Integer romanSymbolsToArabic(String romanSymbols) {
+    checkInput(romanSymbols);
 
-    Integer parsedInteger = doParse(input, 0);
+    Integer accumulator = 0;
+    Integer parsedInteger = convertIfValid(romanSymbols, accumulator);
 
     if (parsedInteger.equals(0)) {
       throw new IllegalArgumentException("Zero does not exists");
@@ -46,18 +46,18 @@ public class KataRomans {
     }
   }
 
-  private static Integer doParse(String input, Integer subtotal) {
-    if (input.isEmpty()) {
-      return subtotal;
+  private static Integer convertIfValid(String romanSymbols, Integer currentTotal) {
+    if (romanSymbols.isEmpty()) {
+      return currentTotal;
     }
 
     RomanSymbol matchingSymbol = Arrays.stream(RomanSymbol.values())
-        .filter(romanSymbol -> input.startsWith(romanSymbol.name()))
+        .filter(romanSymbol -> romanSymbols.startsWith(romanSymbol.name()))
         .findFirst()
         .orElseThrow(() -> new IllegalArgumentException("Accepted symbols are: [I V X L C D M]"));
 
-    String nextInput = input.substring(matchingSymbol.name().length());
+    String remainingSymbols = romanSymbols.substring(matchingSymbol.name().length());
 
-    return doParse(nextInput, subtotal + matchingSymbol.getValue());
+    return convertIfValid(remainingSymbols, currentTotal + matchingSymbol.getValue());
   }
 }

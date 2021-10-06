@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,11 +47,11 @@ public class KataRomansTest {
   }
 
   private void testRomanSymbolsParsing(String romanSymbols, Integer expectedInteger) {
-    assertThat(KataRomans.parse(romanSymbols)).isEqualTo(expectedInteger);
+    assertThat(KataRomans.romanSymbolsToArabic(romanSymbols)).isEqualTo(expectedInteger);
   }
 
-  private void testRomanSymbolsParsingThrows(String input, String errorMessage) {
-    assertThatThrownBy(() -> KataRomans.parse(input))
+  private void testRomanSymbolsParsingThrows(String romanSymbols, String errorMessage) {
+    assertThatThrownBy(() -> KataRomans.romanSymbolsToArabic(romanSymbols))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessage(errorMessage);
   }
