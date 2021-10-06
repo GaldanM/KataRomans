@@ -2,7 +2,13 @@ import java.util.Arrays;
 
 public class KataRomans {
   public static Integer parse(String input) {
-    return doParse(input, 0);
+    Integer parsedInteger = doParse(input, 0);
+
+    if (parsedInteger.equals(0)) {
+      throw new IllegalArgumentException("Zero does not exists");
+    }
+
+    return parsedInteger;
   }
 
   private static Integer doParse(String input, Integer subtotal) {

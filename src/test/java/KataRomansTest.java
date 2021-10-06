@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class KataRomansTest {
   @Test
@@ -71,6 +72,13 @@ public class KataRomansTest {
   @Test
   void CM_is_900() {
     testRomanSymbolsParsing("CM", 900);
+  }
+
+  @Test
+  void zero_does_not_exists() {
+    assertThatThrownBy(() -> KataRomans.parse(""))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("Zero does not exists");
   }
 
   private void testRomanSymbolsParsing(String romanSymbols, Integer expectedInteger) {
