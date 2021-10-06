@@ -36,19 +36,10 @@ public class KataRomansTest {
     testRomanSymbolsParsingThrows(romanSymbol.repeat(4), "I, X, C and M cannot be repeated more than three times successively");
   }
 
-  @Test
-  void V_cannot_be_repeated() {
-    testRomanSymbolsParsingThrows("XVIV", "V, L and D cannot be repeated");
-  }
-
-  @Test
-  void L_cannot_be_repeated() {
-    testRomanSymbolsParsingThrows("CLXL", "V, L and D cannot be repeated");
-  }
-
-  @Test
-  void D_cannot_be_repeated() {
-    testRomanSymbolsParsingThrows("MDCD", "V, L and D cannot be repeated");
+  @ParameterizedTest
+  @ValueSource(strings = { "V", "L", "D" })
+  void symbols_that_cannot_be_repeated(String romanSymbol) {
+    testRomanSymbolsParsingThrows(romanSymbol.repeat(4), "V, L and D cannot be repeated");
   }
 
   @Test
