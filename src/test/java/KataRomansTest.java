@@ -1,42 +1,16 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class KataRomansTest {
-  @Test
-  void I_is_1() {
-    testRomanSymbolsParsing("I", 1);
-  }
-
-  @Test
-  void V_is_5() {
-    testRomanSymbolsParsing("V", 5);
-  }
-
-  @Test
-  void X_is_10() {
-    testRomanSymbolsParsing("X", 10);
-  }
-
-  @Test
-  void L_is_50() {
-    testRomanSymbolsParsing("L", 50);
-  }
-
-  @Test
-  void C_is_100() {
-    testRomanSymbolsParsing("C", 100);
-  }
-
-  @Test
-  void D_is_500() {
-    testRomanSymbolsParsing("D", 500);
-  }
-
-  @Test
-  void M_is_1000() {
-    testRomanSymbolsParsing("M", 1000);
+  @ParameterizedTest
+  @CsvSource({"I,1", "V,5", "X,10", "L,50", "C,100", "D,500", "M,1000"})
+  void single_char_symbols_have_a_value(String romanSymbolSingleChar, String romanSymbolValue) {
+    testRomanSymbolsParsing(romanSymbolSingleChar, Integer.parseInt(romanSymbolValue));
   }
 
   @Test
