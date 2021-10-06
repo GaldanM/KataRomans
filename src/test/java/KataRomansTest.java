@@ -18,34 +18,10 @@ public class KataRomansTest {
     testRomanSymbolsParsing("XVI", 16);
   }
 
-  @Test
-  void IV_is_4() {
-    testRomanSymbolsParsing("IV", 4);
-  }
-
-  @Test
-  void IX_is_9() {
-    testRomanSymbolsParsing("IX", 9);
-  }
-
-  @Test
-  void XL_is_40() {
-    testRomanSymbolsParsing("XL", 40);
-  }
-
-  @Test
-  void XC_is_90() {
-    testRomanSymbolsParsing("XC", 90);
-  }
-
-  @Test
-  void CD_is_400() {
-    testRomanSymbolsParsing("CD", 400);
-  }
-
-  @Test
-  void CM_is_900() {
-    testRomanSymbolsParsing("CM", 900);
+  @ParameterizedTest
+  @CsvSource({"IV,4", "IX,9", "XL,40", "XC,90", "CD,400", "CM,900" })
+  void double_char_symbols_have_a_value(String romanSymbolDoubleChar, String romanSymbolValue) {
+    testRomanSymbolsParsing(romanSymbolDoubleChar, Integer.parseInt(romanSymbolValue));
   }
 
   @Test
