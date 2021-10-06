@@ -17,9 +17,10 @@ public class KataRomansTest {
     testRomanSymbolsParsing(romanSymbolSingleChar, Integer.parseInt(romanSymbolValue));
   }
 
-  @Test
-  void symbols_should_add() {
-    testRomanSymbolsParsing("XVI", 16);
+  @ParameterizedTest
+  @CsvSource({ "XVI,16", "XXVI,26", "XXXIX,39", "XXXVII,37", "CLIX,159", "MCCXXXVIII,1238", "DXLV,545", "MMXXI,2021" })
+  void symbols_should_add(String romanSymbols, String expectedValue) {
+    testRomanSymbolsParsing(romanSymbols, Integer.parseInt(expectedValue));
   }
 
   @ParameterizedTest
