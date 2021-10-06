@@ -17,6 +17,11 @@ public class KataRomans {
   }
 
   private static void checkInput(String input) {
+    checkForSymbolsRepeatingMoreThanThreeTimes(input);
+    checkForNonRepeatableSymbols(input);
+  }
+
+  private static void checkForSymbolsRepeatingMoreThanThreeTimes(String input) {
     String[] repeatableUpToThreeSymbols = new String[] { "I", "X", "C", "M" };
     boolean hasSymbolRepeatingMoreThanThreeTimes = Arrays.stream(repeatableUpToThreeSymbols)
         .anyMatch(symbol -> input.contains(symbol.repeat(4)));
@@ -24,7 +29,9 @@ public class KataRomans {
     if (hasSymbolRepeatingMoreThanThreeTimes) {
       throw new IllegalArgumentException("I, X, C and M cannot be repeated more than three times successively");
     }
+  }
 
+  private static void checkForNonRepeatableSymbols(String input) {
     boolean hasRepeatingNonRepeatableSymbols = Arrays.stream(input.split(""))
         .filter(symbol -> symbol.matches("[VLD]"))
         .collect(Collectors.groupingBy(
