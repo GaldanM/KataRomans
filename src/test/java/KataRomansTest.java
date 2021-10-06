@@ -76,12 +76,36 @@ public class KataRomansTest {
 
   @Test
   void zero_does_not_exists() {
-    assertThatThrownBy(() -> KataRomans.parse(""))
-        .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("Zero does not exists");
+    testRomanSymbolsParsingThrows("", "Zero does not exists");
+  }
+
+  @Test
+  void I_cannot_be_repeated_more_than_three_times_successively() {
+    testRomanSymbolsParsingThrows("IIII", "I, X, C and M cannot be repeated more than three times successively");
+  }
+
+  @Test
+  void X_cannot_be_repeated_more_than_three_times_successively() {
+    testRomanSymbolsParsingThrows("XXXX", "I, X, C and M cannot be repeated more than three times successively");
+  }
+
+  @Test
+  void C_cannot_be_repeated_more_than_three_times_successively() {
+    testRomanSymbolsParsingThrows("CCCC", "I, X, C and M cannot be repeated more than three times successively");
+  }
+
+  @Test
+  void M_cannot_be_repeated_more_than_three_times_successively() {
+    testRomanSymbolsParsingThrows("MMMM", "I, X, C and M cannot be repeated more than three times successively");
   }
 
   private void testRomanSymbolsParsing(String romanSymbols, Integer expectedInteger) {
     assertThat(KataRomans.parse(romanSymbols)).isEqualTo(expectedInteger);
+  }
+
+  private void testRomanSymbolsParsingThrows(String input, String errorMessage) {
+    assertThatThrownBy(() -> KataRomans.parse(input))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage(errorMessage);
   }
 }
