@@ -1,3 +1,7 @@
+import exception.SymbolDoesNotExistsException;
+import exception.SymbolRepeatedException;
+import exception.SymbolRepeatedTooMuchException;
+import exception.ZeroDoesNotExistsException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -26,33 +30,32 @@ public class KataRomansTest {
 
   @Test
   void zero_does_not_exists() {
-    testRomanSymbolsParsingThrows("", "Zero does not exists");
+    testRomanSymbolsParsingThrows("", ZeroDoesNotExistsException.class);
   }
 
   @ParameterizedTest
   @ValueSource(strings = { "I", "X", "C", "M" })
   void symbols_that_cannot_be_repeated_more_than_three_times_successively(String romanSymbol) {
-    testRomanSymbolsParsingThrows(romanSymbol.repeat(4), "I, X, C and M cannot be repeated more than three times successively");
+    testRomanSymbolsParsingThrows(romanSymbol.repeat(4), SymbolRepeatedTooMuchException.class);
   }
 
   @ParameterizedTest
   @ValueSource(strings = { "V", "L", "D" })
   void symbols_that_cannot_be_repeated(String romanSymbol) {
-    testRomanSymbolsParsingThrows(romanSymbol.repeat(4), "V, L and D cannot be repeated");
+    testRomanSymbolsParsingThrows(romanSymbol.repeat(4), SymbolRepeatedException.class);
   }
 
   @Test
   void should_throw_on_non_recognized_symbol() {
-    testRomanSymbolsParsingThrows("K", "Accepted symbols are: [I V X L C D M]");
+    testRomanSymbolsParsingThrows("K", SymbolDoesNotExistsException.class);
   }
 
   private void testRomanSymbolsParsing(String romanSymbols, Integer expectedInteger) {
     assertThat(KataRomans.romanSymbolsToArabic(romanSymbols)).isEqualTo(expectedInteger);
   }
 
-  private void testRomanSymbolsParsingThrows(String romanSymbols, String errorMessage) {
+  private void testRomanSymbolsParsingThrows(String romanSymbols, Class<?> exceptionClass) {
     assertThatThrownBy(() -> KataRomans.romanSymbolsToArabic(romanSymbols))
-        .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage(errorMessage);
+        .isInstanceOf(exceptionClass);
   }
 }

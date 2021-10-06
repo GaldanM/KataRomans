@@ -1,3 +1,8 @@
+import exception.SymbolDoesNotExistsException;
+import exception.SymbolRepeatedException;
+import exception.SymbolRepeatedTooMuchException;
+import exception.ZeroDoesNotExistsException;
+
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -10,7 +15,7 @@ public class KataRomans {
     Integer parsedInteger = convertIfValid(romanSymbols, accumulator);
 
     if (parsedInteger.equals(0)) {
-      throw new IllegalArgumentException("Zero does not exists");
+      throw new ZeroDoesNotExistsException();
     }
 
     return parsedInteger;
@@ -27,7 +32,7 @@ public class KataRomans {
         .anyMatch(symbol -> input.contains(symbol.repeat(4)));
 
     if (hasSymbolRepeatingMoreThanThreeTimes) {
-      throw new IllegalArgumentException("I, X, C and M cannot be repeated more than three times successively");
+      throw new SymbolRepeatedTooMuchException();
     }
   }
 
@@ -42,7 +47,7 @@ public class KataRomans {
         .anyMatch(entry -> entry.getValue() > 1);
 
     if (hasRepeatingNonRepeatableSymbols) {
-      throw new IllegalArgumentException("V, L and D cannot be repeated");
+      throw new SymbolRepeatedException();
     }
   }
 
@@ -54,7 +59,7 @@ public class KataRomans {
     RomanSymbol matchingSymbol = Arrays.stream(RomanSymbol.values())
         .filter(romanSymbol -> romanSymbols.startsWith(romanSymbol.name()))
         .findFirst()
-        .orElseThrow(() -> new IllegalArgumentException("Accepted symbols are: [I V X L C D M]"));
+        .orElseThrow(SymbolDoesNotExistsException::new);
 
     String remainingSymbols = romanSymbols.substring(matchingSymbol.name().length());
 
