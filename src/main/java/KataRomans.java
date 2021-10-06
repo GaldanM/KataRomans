@@ -54,7 +54,7 @@ public class KataRomans {
     RomanSymbol matchingSymbol = Arrays.stream(RomanSymbol.values())
         .filter(romanSymbol -> input.startsWith(romanSymbol.name()))
         .findFirst()
-        .orElseThrow();
+        .orElseThrow(() -> new IllegalArgumentException("Accepted symbols are: [I V X L C D M]"));
 
     String nextInput = input.substring(matchingSymbol.name().length());
 

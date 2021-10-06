@@ -114,6 +114,11 @@ public class KataRomansTest {
     testRomanSymbolsParsingThrows("MDCD", "V, L and D cannot be repeated");
   }
 
+  @Test
+  void should_throw_on_non_recognized_symbol() {
+    testRomanSymbolsParsingThrows("K", "Accepted symbols are: [I V X L C D M]");
+  }
+
   private void testRomanSymbolsParsing(String romanSymbols, Integer expectedInteger) {
     assertThat(KataRomans.parse(romanSymbols)).isEqualTo(expectedInteger);
   }
