@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -29,24 +30,10 @@ public class KataRomansTest {
     testRomanSymbolsParsingThrows("", "Zero does not exists");
   }
 
-  @Test
-  void I_cannot_be_repeated_more_than_three_times_successively() {
-    testRomanSymbolsParsingThrows("IIII", "I, X, C and M cannot be repeated more than three times successively");
-  }
-
-  @Test
-  void X_cannot_be_repeated_more_than_three_times_successively() {
-    testRomanSymbolsParsingThrows("XXXX", "I, X, C and M cannot be repeated more than three times successively");
-  }
-
-  @Test
-  void C_cannot_be_repeated_more_than_three_times_successively() {
-    testRomanSymbolsParsingThrows("CCCC", "I, X, C and M cannot be repeated more than three times successively");
-  }
-
-  @Test
-  void M_cannot_be_repeated_more_than_three_times_successively() {
-    testRomanSymbolsParsingThrows("MMMM", "I, X, C and M cannot be repeated more than three times successively");
+  @ParameterizedTest
+  @ValueSource(strings = { "I", "X", "C", "M" })
+  void symbols_that_cannot_be_repeated_more_than_three_times_successively(String romanSymbol) {
+    testRomanSymbolsParsingThrows(romanSymbol.repeat(4), "I, X, C and M cannot be repeated more than three times successively");
   }
 
   @Test
